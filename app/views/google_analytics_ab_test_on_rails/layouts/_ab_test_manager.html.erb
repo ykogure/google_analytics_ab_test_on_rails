@@ -1,0 +1,47 @@
+<% if ab_tests.present? %>
+  <div style="position: fixed; width: 100%; top: 0px; z-index: 100; overflow: hidden;">
+    <div id="ab_test_manager_main_window" style="background-color: rgba(0,40,51,0.9);">
+      <div style="font-size: 11px; color: rgba(185,209,212,0.9); padding: 3px 5px;">
+        <% ab_tests.each do |ab_test_name, ab_test_values| %>
+          <div style="padding: 2.5px;">
+            <%= ab_test_name %>：
+            <% values = ab_test_values.is_a?(Hash) ? ab_test_values.keys : ab_test_values %>
+            <% values.each do |ab_test_value| %>
+              <% value_name = ab_test_values.is_a?(Hash) ? "#{ab_test_value}(#{ab_test_values[ab_test_value]})" : ab_test_value %>
+              <% if get_ab_test_value(ab_test_name) != ab_test_value %>
+                <% path = url_for(@origin_params.merge(ab_test_force_change: {ab_test_name => ab_test_value})) %>
+                <span style="margin-left: 5px;">
+                  <%= link_to "#{value_name}", path, style: 'color: rgba(109,165,255,0.9); text-decoration: underline;' %>
+                </span>
+              <% else %>
+                <span style="margin-left: 5px;">
+                  ✓<%= value_name %>
+                </span>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div style="position: relative; height: 20px;">
+      <div id="js_ab_test_manager_toggle_btn" style="right: 0px; top: -1px; z-index: 99; height: 0; width: 135px; border-top: 18px solid rgba(0,40,51,0.9); border-left: 15px solid transparent; border-right: 15px solid transparent; position: absolute;">
+        <div style="font-size: 10px; color: rgba(185,209,212,0.9); top: -16px; position: absolute;">ab test manager▲</div>
+      </div>
+    </div>
+  </div>
+
+  <% content_for :javascript do %>
+    <script type="text/javascript">
+      $('#js_ab_test_manager_toggle_btn').click(function() {
+        $('#ab_test_manager_main_window').slideToggle('fast');
+        var btn_text = $(this).children().text();
+        if(btn_text.indexOf('▲') > 0){
+          btn_text = btn_text.replace("▲", "▼");
+        }else{
+          btn_text = btn_text.replace("▼", "▲");
+        }
+        $(this).children().text(btn_text);
+      });
+    </script>
+  <% end %>
+<% end %>

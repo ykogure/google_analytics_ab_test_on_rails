@@ -1,3 +1,4 @@
+require "gtm_on_rails/engine"
+
 module GoogleAnalyticsAbTestOnRails
-  # Your code goes here...
 end
