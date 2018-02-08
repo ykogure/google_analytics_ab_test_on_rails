@@ -1,0 +1,12 @@
+*.gem
+.idea
+.rvmrc
+.bundle/
+.DS_Store
+.ruby-version
+vendor/bundle
+
+log/*.log
+pkg/
+
+/test/dummy/
