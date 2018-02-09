@@ -18,4 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", ">= 3.2.0"
   s.add_dependency "gtm_on_rails"
+  
+  s.add_development_dependency "mysql2"
+  s.add_development_dependency "gtm_on_rails"
 end
