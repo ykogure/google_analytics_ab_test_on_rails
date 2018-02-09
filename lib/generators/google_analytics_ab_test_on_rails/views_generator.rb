@@ -12,13 +12,13 @@ module GoogleAnalyticsAbTestOnRails
       def copy_views
         case type
         when 'bootstrap3'
-          
+
         when 'position_under'
-          copy_file "ab_test_manager/position_under.html.erb", "app/views/google_analytics_ab_test_on_rails/ab_test_manager.html.erb"
+          copy_file "ab_test_manager/position_under.html.erb", "app/views/google_analytics_ab_test_on_rails/_ab_test_manager.html.erb"
         when 'position_top'
-          copy_file "ab_test_manager/position_top.html.erb", "app/views/google_analytics_ab_test_on_rails/ab_test_manager.html.erb"
+          copy_file "ab_test_manager/position_top.html.erb", "app/views/google_analytics_ab_test_on_rails/_ab_test_manager.html.erb"
         when nil
-          copy_file "ab_test_manager/position_top.html.erb", "app/views/google_analytics_ab_test_on_rails/ab_test_manager.html.erb"
+          copy_file "ab_test_manager/position_top.html.erb", "app/views/google_analytics_ab_test_on_rails/_ab_test_manager.html.erb"
         else
           raise NameError.new("'#{type}' is undefined template type.")
         end

@@ -1,31 +1,34 @@
 <% if ab_tests.present? %>
-  <div style="position: fixed; width: 100%; top: 0px; left: 0px; z-index: 100; overflow: hidden;">
-    <div id="ab_test_manager_main_window" style="background-color: rgba(0,40,51,0.9);">
-      <div style="font-size: 0.8em; color: rgba(185,209,212,0.9); padding: 3px 5px;">
+  <div id="ab_test_manager" class="position_under">
+    <div id="ab_test_manager_btn_window">
+      <div id="js_ab_test_manager_close_btn">
+        <div>ab test manager ▼</div>
+      </div>
+      <div id="js_ab_test_manager_open_btn" style="display: none;">
+        <div>ab test manager ▲</div>
+      </div>
+    </div>
+    <div id="ab_test_manager_main_window">
+      <div>
         <% ab_tests.each do |ab_test_name, ab_test_values| %>
-          <div style="padding: 2.5px;">
+          <div class="ab_test_manager_ab_tests">
             <%= ab_test_name %>：
             <% values = ab_test_values.is_a?(Hash) ? ab_test_values.keys : ab_test_values %>
             <% values.each do |ab_test_value| %>
               <% value_name = ab_test_values.is_a?(Hash) ? "#{ab_test_value}(#{ab_test_values[ab_test_value]})" : ab_test_value %>
               <% if get_ab_test_value(ab_test_name) != ab_test_value %>
                 <% path = url_for(params.merge(ga_ab_test_force_change: {ab_test_name => ab_test_value}).permit!.to_h) %>
-                <span style="margin-left: 5px;">
-                  <%= link_to "#{value_name}", path, style: 'color: rgba(109,165,255,0.9); text-decoration: underline;' %>
+                <span>
+                  <%= link_to "#{value_name}", path %>
                 </span>
               <% else %>
-                <span style="margin-left: 5px;">
+                <span>
                   ✓<%= value_name %>
                 </span>
               <% end %>
             <% end %>
           </div>
         <% end %>
-      </div>
-    </div>
-    <div style="position: relative; height: 20px;">
-      <div id="js_ab_test_manager_toggle_btn" style="right: 0px; top: -1px; z-index: 99; height: 0; width: 7em; border-top: 18px solid rgba(0,40,51,0.9); border-left: 15px solid transparent; border-right: 15px solid transparent; position: absolute;">
-        <div style="font-size: 0.7em; color: rgba(185,209,212,0.9); top: -16px; position: absolute;">ab test manager ▲</div>
       </div>
     </div>
   </div>
