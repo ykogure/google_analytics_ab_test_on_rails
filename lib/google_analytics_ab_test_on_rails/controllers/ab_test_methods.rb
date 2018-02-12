@@ -27,16 +27,17 @@ module GoogleAnalyticsAbTestOnRails
           event_category = get_event_category(args)
           event_action   = get_event_action(args)
           event_label    = get_event_label(ab_test_name, value, args)
-          if GoogleAnalyticsAbTestOnRails.config.sender == :gtm
+          case GoogleAnalyticsAbTestOnRails.config.sender
+          when :gtm
             @gtm_on_rails_data_layer.push({
               event:          'ga_event',
               event_category: event_category,
               event_action:   event_action,
               event_label:    event_label
             })
-          elsif :analytics_js
+          when :analytics_js
             @analytics_js_codes ||= []
-            @analytics_js_codes << "ga('send', 'event', {eventCategory: '#{event_category}', eventAction: '#{event_action}', eventLabel: #{event_action}});"
+            @analytics_js_codes << "ga('send', 'event', {eventCategory: '#{event_category}', eventAction: '#{event_action}', eventLabel: '#{event_label}'});"
           end
         end
 
@@ -47,16 +48,17 @@ module GoogleAnalyticsAbTestOnRails
           event_category = get_event_category(args)
           event_action   = get_event_action(args)
           event_label    = get_event_label(ab_test_name, value, args)
-          if GoogleAnalyticsAbTestOnRails.config.sender == :gtm
+          case GoogleAnalyticsAbTestOnRails.config.sender
+          when :gtm
             @gtm_on_rails_data_layer.push({
               event:          'ga_event',
               event_category: event_category,
               event_action:   event_action,
               event_label:    event_label
             })
-          elsif :analytics_js
+          when :analytics_js
             @analytics_js_codes ||= []
-            @analytics_js_codes << "ga('send', 'event', {eventCategory: '#{event_category}', eventAction: '#{event_action}', eventLabel: #{event_action}});"
+            @analytics_js_codes << "ga('send', 'event', {eventCategory: '#{event_category}', eventAction: '#{event_action}', eventLabel: '#{event_label}'});"
           end
         end
 
@@ -114,7 +116,7 @@ module GoogleAnalyticsAbTestOnRails
           else
             label = GoogleAnalyticsAbTestOnRails.config.tracking_event_label || 'ab_test'
           end
-          
+
           label.gsub(/\{ab_test_name\}/, ab_test_name.to_s).gsub(/\{ab_test_value\}/, ab_test_value.to_s)
         end
     end

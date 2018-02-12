@@ -1,6 +1,6 @@
 GoogleAnalyticsAbTestOnRails.configure do |config|
   # Settings that use Google Tag Manager or analytics.js when send events Google Analytics.
-  config.sender = :gtm # :gtm or :analytics_js
+  config.sender = :analytics_js # :gtm or :analytics_js
 
   # Google Analytics Tracking Event Settings
   # Event Category is "#{controller_path}##{action_name}" if set nil.

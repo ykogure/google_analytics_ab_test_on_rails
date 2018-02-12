@@ -7,8 +7,8 @@ module GoogleAnalyticsAbTestOnRails
         tags.join.html_safe
       end
 
-      def render_analytics_js
-        "<script type=\"text/javascript\">#{(@analytics_js || []).join}</script>".html_safe
+      def render_ab_test_analytics_js
+        "<script type=\"text/javascript\">#{(@analytics_js_codes || []).join}</script>".html_safe
       end
     end
   end
