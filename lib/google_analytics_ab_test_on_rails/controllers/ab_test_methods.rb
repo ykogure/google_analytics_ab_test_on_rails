@@ -24,14 +24,19 @@ module GoogleAnalyticsAbTestOnRails
           # GoogleAnalyticsではセッションが30分で切れてしまうため、30分毎にABテストイベントを再送信するためのcookie情報
           cookies[:"#{ab_test_session_key}_for_ga_session"] = {value: true, expires: 30.minutes.from_now}
 
+          event_category = get_event_category(args)
+          event_action   = get_event_action(args)
+          event_label    = get_event_label(ab_test_name, value, args)
           if GoogleAnalyticsAbTestOnRails.config.sender == :gtm
             @gtm_on_rails_data_layer.push({
-              event:           'ab_test',
-              event_category:  (args[:event_category].present? ? args[:event_category] : "#{controller_path}##{action_name}"),
-              ab_test_title:   ab_test_name,
-              ab_test_pattern: session[ab_test_session_key]
+              event:          'ga_event',
+              event_category: event_category,
+              event_action:   event_action,
+              event_label:    event_label
             })
           elsif :analytics_js
+            @analytics_js_codes ||= []
+            @analytics_js_codes << "ga('send', 'event', {eventCategory: '#{event_category}', eventAction: '#{event_action}', eventLabel: #{event_action}});"
           end
         end
 
@@ -39,14 +44,19 @@ module GoogleAnalyticsAbTestOnRails
         if cookies[:"#{ab_test_session_key}_for_ga_session"].blank?
           cookies[:"#{ab_test_session_key}_for_ga_session"] = {value: true, expires: 30.minutes.from_now}
 
+          event_category = get_event_category(args)
+          event_action   = get_event_action(args)
+          event_label    = get_event_label(ab_test_name, value, args)
           if GoogleAnalyticsAbTestOnRails.config.sender == :gtm
             @gtm_on_rails_data_layer.push({
-              event:           'ab_test',
-              event_category:  (args[:event_category].present? ? args[:event_category] : "#{controller_path}##{action_name}"),
-              ab_test_title:   ab_test_name,
-              ab_test_pattern: session[ab_test_session_key]
+              event:          'ga_event',
+              event_category: event_category,
+              event_action:   event_action,
+              event_label:    event_label
             })
           elsif :analytics_js
+            @analytics_js_codes ||= []
+            @analytics_js_codes << "ga('send', 'event', {eventCategory: '#{event_category}', eventAction: '#{event_action}', eventLabel: #{event_action}});"
           end
         end
 
@@ -80,6 +90,32 @@ module GoogleAnalyticsAbTestOnRails
             value = values.sample
           end
           value
+        end
+
+        def get_event_category(args)
+          if args[:event_category].present?
+            args[:event_category]
+          else
+            GoogleAnalyticsAbTestOnRails.config.tracking_event_category || "#{controller_path}##{action_name}"
+          end
+        end
+
+        def get_event_action(args)
+          if args[:event_action].present?
+            args[:event_action]
+          else
+            GoogleAnalyticsAbTestOnRails.config.tracking_event_action || 'ab_test'
+          end
+        end
+
+        def get_event_label(ab_test_name, ab_test_value, args)
+          if args[:event_label].present?
+            label = args[:event_label]
+          else
+            label = GoogleAnalyticsAbTestOnRails.config.tracking_event_label || 'ab_test'
+          end
+          
+          label.gsub(/\{ab_test_name\}/, ab_test_name.to_s).gsub(/\{ab_test_value\}/, ab_test_value.to_s)
         end
     end
   end
