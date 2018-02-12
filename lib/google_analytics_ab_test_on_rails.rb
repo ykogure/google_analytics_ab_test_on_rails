@@ -1,3 +1,4 @@
+require "google_analytics_ab_test_on_rails/engine"
+
 module GoogleAnalyticsAbTestOnRails
-  # Your code goes here...
 end

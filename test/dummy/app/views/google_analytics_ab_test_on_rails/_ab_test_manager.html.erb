@@ -1,0 +1,35 @@
+<% if ab_tests.present? %>
+  <div id="ab_test_manager" class="position_under">
+    <div id="ab_test_manager_btn_window">
+      <div id="js_ab_test_manager_close_btn">
+        <div>ab test manager ▼</div>
+      </div>
+      <div id="js_ab_test_manager_open_btn" style="display: none;">
+        <div>ab test manager ▲</div>
+      </div>
+    </div>
+    <div id="ab_test_manager_main_window">
+      <div>
+        <% ab_tests.each do |ab_test_name, ab_test_values| %>
+          <div class="ab_test_manager_ab_tests">
+            <%= ab_test_name %>：
+            <% values = ab_test_values.is_a?(Hash) ? ab_test_values.keys : ab_test_values %>
+            <% values.each do |ab_test_value| %>
+              <% value_name = ab_test_values.is_a?(Hash) ? "#{ab_test_value}(#{ab_test_values[ab_test_value]})" : ab_test_value %>
+              <% if get_ab_test_value(ab_test_name) != ab_test_value %>
+                <% path = url_for(params.merge(ga_ab_test_force_change: {ab_test_name => ab_test_value}).permit!.to_h) %>
+                <span>
+                  <%= link_to "#{value_name}", path %>
+                </span>
+              <% else %>
+                <span>
+                  ✓<%= value_name %>
+                </span>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

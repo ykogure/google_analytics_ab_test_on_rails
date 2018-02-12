@@ -1,0 +1,208 @@
+// #ab_test_manager.position_top{
+//   position: fixed;
+//   width:    100%;
+//   top:      0px;
+//   left:     0px;
+//   z-index:  100;
+//   overflow: hidden;
+
+//   #ab_test_manager_main_window{
+//     background-color: rgba(0,40,51,0.9);
+
+//     >div{
+//       font-size: 0.8em;
+//       color:     rgba(185,209,212,0.9);
+//       padding:   3px 5px;
+
+//       .ab_test_manager_ab_tests{
+//         padding: 2.5px;
+
+//         >span{
+//           margin-left: 5px;
+//         }
+
+//         a{
+//           color:           rgba(109,165,255,0.9);
+//           text-decoration: underline;
+//         }
+//       }
+//     }
+//   }
+
+//   #ab_test_manager_btn_window{
+//     position: relative;
+//     height:   20px;
+
+//     #js_ab_test_manager_open_btn,#js_ab_test_manager_close_btn{
+//       position:     absolute;
+//       right:        0px;
+//       top:          -1px;
+//       z-index:      99;
+//       height:       0;
+//       width:        7em;
+//       border-top:   18px solid rgba(0,40,51,0.9);
+//       border-left:  15px solid transparent;
+//       border-right: 15px solid transparent;
+
+//       >div{
+//         position:  absolute;
+//         font-size: 0.7em;
+//         color:     rgba(185,209,212,0.9);
+//         top:       -16px;
+//       }
+//     }
+//   }
+// }
+
+// #ab_test_manager.position_under{
+//   position: fixed;
+//   width:    100%;
+//   bottom:   0px;
+//   left:     0px;
+//   z-index:  100;
+//   overflow: hidden;
+
+//   #ab_test_manager_main_window{
+//     background-color: rgba(0,40,51,0.9);
+
+//     >div{
+//       font-size: 0.8em;
+//       color:     rgba(185,209,212,0.9);
+//       padding:   3px 5px;
+
+//       .ab_test_manager_ab_tests{
+//         padding: 2.5px;
+
+//         >span{
+//           margin-left: 5px;
+//         }
+
+//         a{
+//           color:           rgba(109,165,255,0.9);
+//           text-decoration: underline;
+//         }
+//       }
+//     }
+//   }
+
+//   #ab_test_manager_btn_window{
+//     position: relative;
+//     height:   20px;
+
+//     #js_ab_test_manager_open_btn,#js_ab_test_manager_close_btn{
+//       position:      absolute;
+//       right:         0px;
+//       bottom:        -1px;
+//       z-index:       99;
+//       height:        20px;
+//       width:         7em;
+//       border-bottom: 18px solid rgba(0,40,51,0.9);
+//       border-left:   15px solid transparent;
+//       border-right:  15px solid transparent;
+
+//       >div{
+//         position:  absolute;
+//         font-size: 0.7em;
+//         color:     rgba(185,209,212,0.9);
+//         top:       20px;
+//       }
+//     }
+//   }
+// }
+
+#ab_test_manager.position_top {
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 100;
+  overflow: hidden;
+}
+#ab_test_manager.position_top #ab_test_manager_main_window {
+  background-color: rgba(0, 40, 51, 0.9);
+}
+#ab_test_manager.position_top #ab_test_manager_main_window > div {
+  font-size: 0.8em;
+  color: rgba(185, 209, 212, 0.9);
+  padding: 3px 5px;
+}
+#ab_test_manager.position_top #ab_test_manager_main_window > div .ab_test_manager_ab_tests {
+  padding: 2.5px;
+}
+#ab_test_manager.position_top #ab_test_manager_main_window > div .ab_test_manager_ab_tests > span {
+  margin-left: 5px;
+}
+#ab_test_manager.position_top #ab_test_manager_main_window > div .ab_test_manager_ab_tests a {
+  color: rgba(109, 165, 255, 0.9);
+  text-decoration: underline;
+}
+#ab_test_manager.position_top #ab_test_manager_btn_window {
+  position: relative;
+  height: 20px;
+}
+#ab_test_manager.position_top #ab_test_manager_btn_window #js_ab_test_manager_open_btn, #ab_test_manager.position_top #ab_test_manager_btn_window #js_ab_test_manager_close_btn {
+  position: absolute;
+  right: 0px;
+  top: -1px;
+  z-index: 99;
+  height: 0;
+  width: 7em;
+  border-top: 18px solid rgba(0, 40, 51, 0.9);
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+}
+#ab_test_manager.position_top #ab_test_manager_btn_window #js_ab_test_manager_open_btn > div, #ab_test_manager.position_top #ab_test_manager_btn_window #js_ab_test_manager_close_btn > div {
+  position: absolute;
+  font-size: 0.7em;
+  color: rgba(185, 209, 212, 0.9);
+  top: -16px;
+}
+
+#ab_test_manager.position_under {
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  left: 0px;
+  z-index: 100;
+  overflow: hidden;
+}
+#ab_test_manager.position_under #ab_test_manager_main_window {
+  background-color: rgba(0, 40, 51, 0.9);
+}
+#ab_test_manager.position_under #ab_test_manager_main_window > div {
+  font-size: 0.8em;
+  color: rgba(185, 209, 212, 0.9);
+  padding: 3px 5px;
+}
+#ab_test_manager.position_under #ab_test_manager_main_window > div .ab_test_manager_ab_tests {
+  padding: 2.5px;
+}
+#ab_test_manager.position_under #ab_test_manager_main_window > div .ab_test_manager_ab_tests > span {
+  margin-left: 5px;
+}
+#ab_test_manager.position_under #ab_test_manager_main_window > div .ab_test_manager_ab_tests a {
+  color: rgba(109, 165, 255, 0.9);
+  text-decoration: underline;
+}
+#ab_test_manager.position_under #ab_test_manager_btn_window {
+  position: relative;
+  height: 20px;
+}
+#ab_test_manager.position_under #ab_test_manager_btn_window #js_ab_test_manager_open_btn, #ab_test_manager.position_under #ab_test_manager_btn_window #js_ab_test_manager_close_btn {
+  position: absolute;
+  right: 0px;
+  bottom: -1px;
+  z-index: 99;
+  height: 20px;
+  width: 7em;
+  border-bottom: 18px solid rgba(0, 40, 51, 0.9);
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+}
+#ab_test_manager.position_under #ab_test_manager_btn_window #js_ab_test_manager_open_btn > div, #ab_test_manager.position_under #ab_test_manager_btn_window #js_ab_test_manager_close_btn > div {
+  position: absolute;
+  font-size: 0.7em;
+  color: rgba(185, 209, 212, 0.9);
+  top: 20px;
+}
+
